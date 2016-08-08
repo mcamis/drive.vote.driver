@@ -10,7 +10,7 @@ class Main extends React.Component {
         return (
             <div>
               	<Header logout={this.logout} />
-              	<div id="contentContainer">
+              	<div className="container">
           	        {React.cloneElement(this.props.children, this.props)}
               	</div>
           	</div>

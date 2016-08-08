@@ -6,14 +6,15 @@ import  store, { history } from './store';
 import { createStore } from 'redux';
 
 import App from './containers/App';
-import DriverStatusContainer from './containers/DriverStatusContainer'
+import DriverStatusContainer from './containers/DriverStatusContainer';
+import ActiveRideContainer from './containers/ActiveRideContainer';
 
 const router = (
 	<Provider store={store}>
 		<Router history={history}>
 			<Route path="/"  component={App}>
 				<IndexRoute component={DriverStatusContainer}></IndexRoute>
-				 {/*  <Route path="ride/:rideId" component={RideDetails}></Route> */}
+				<Route path="ride/:rideId" component={ActiveRideContainer}></Route>
 			</Route>
 		</Router>
 	</Provider>

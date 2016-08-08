@@ -8,6 +8,7 @@ function driverState(state = {
     switch (action.type) {
         case 'REQUEST_STATUS':
         case 'REQUEST_TOGGLE':
+        case 'RIDE_CLAIM_ATTEMPT':
             return Object.assign({}, state, {
                 isFetching: true,
             })
@@ -35,8 +36,33 @@ function driverState(state = {
                 isFetching: false,
                 rides: action.rides,
                 waiting_rides_interval: action.waiting_rides_interval,
-
             })
+        case 'RIDE_CLAIMED':
+            action.active_ride.status = 'driver_assigned';
+            return Object.assign({}, state, {
+                isFetching: false,
+                waiting_rides_interval: 0,
+                active_ride: action.active_ride
+            })
+        case 'RIDE_CANCELLED':
+            return Object.assign({}, state, {
+                isFetching: false,
+                active_ride: action.active_ride
+            })
+        case 'RIDER_PICKUP':
+            action.active_ride.status = 'picked_up';
+            return Object.assign({}, state, {
+                isFetching: false,
+                active_ride: action.active_ride
+            })
+
+        case 'RIDE_COMPLETE':
+            action.active_ride.status = 'complete';
+            return Object.assign({}, state, {
+                isFetching: false,
+                active_ride: action.active_ride
+            })
+
         default:
             return state;
     }

@@ -42,6 +42,59 @@ export function receveWaitingRides(rides) {
     }
 }
 
+
+export function attemptClaim(){
+    return{
+        type: 'RIDE_CLAIM_ATTEMPT',
+   }
+}
+export function claimRideSuccess(ride){
+    return{
+        type: 'RIDE_CLAIMED',
+        active_ride: ride
+    }
+}
+
+
+export function attemptCancel(){
+    return{
+        type: 'RIDE_CANCEL_ATTEMPT',
+   }
+}
+export function cancelRideSuccess(ride){
+    return{
+        type: 'RIDE_CANCELLED',
+        active_ride: {}
+    }
+}
+
+
+export function attemptPickup(){
+    return{
+        type: 'RIDER_PICKUP_ATTEMPT',
+   }
+}
+export function pickupRiderSuccess(ride){
+    return{
+        type: 'RIDER_PICKUP',
+        active_ride: ride
+    }
+}
+
+export function attemptDropoff(){
+    return{
+        type: 'RIDE_COMPLETE_ATTEMPT',
+   }
+}
+export function dropoffSuccess(ride){
+    return{
+        type: 'RIDE_COMPLETE',
+        active_ride: ride
+    }
+}
+
+
+
 // TODO: API urls to environment vars
 export function fetchStatus() {
     const fakeResults = {
@@ -140,9 +193,80 @@ export function fetchWaitingRides() {
     }
 }
 
-/*
-/driving/accept_ride
-/driving/unaccept_ride
-/driving/pickup_ride
-/driving/complete_ride
-*/
+export function claimRide(ride) {
+    // /driving/accept_rid
+    // Maybe this endpoint should return the current state of the ride?
+    return function(dispatch) {
+        dispatch(attemptClaim())
+        return fetch('http://httpbin.org/post', {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'default',
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                })
+            })
+            .then(response => response.json())
+            .then(json =>
+                dispatch(claimRideSuccess(ride))
+            )
+    }
+}
+
+export function cancelRide(ride) {
+    // /driving/unaccept_ride
+    return function(dispatch) {
+        dispatch(attemptCancel())
+        return fetch('http://httpbin.org/post', {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'default',
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                })
+            })
+            .then(response => response.json())
+            .then(json =>
+                dispatch(cancelRideSuccess(ride))
+            )
+    }
+}
+
+export function pickupRider(ride) {
+    // /driving/pickup_ride
+    return function(dispatch) {
+        dispatch(attemptPickup())
+        return fetch('http://httpbin.org/post', {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'default',
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                })
+            })
+            .then(response => response.json())
+            .then(json =>
+                dispatch(pickupRiderSuccess(ride))
+            )
+    }
+}
+
+
+export function completeRide(ride) {
+    // /driving/complete_ride
+    return function(dispatch) {
+        dispatch(attemptDropoff())
+        return fetch('http://httpbin.org/post', {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'default',
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                })
+            })
+            .then(response => response.json())
+            .then(json =>
+                dispatch(dropoffSuccess(ride))
+            )
+    }
+}

@@ -12,7 +12,7 @@ class PendingRide extends React.Component {
                 <div className="panel panel-default">
                     <p>Ride <label>{ride.id}</label></p>
                     <p>{ride.from_address}</p>
-                    <button className="btn btn-success">Accept Ride</button>
+                    <button className="btn btn-success"  onClick={()=>this.props.claimRide(ride)}>Accept Ride</button>
                 </div>
             )  
     }

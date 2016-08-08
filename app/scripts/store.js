@@ -19,7 +19,7 @@ const store = createStore(
     rootReducer,
     compose(
         applyMiddleware(thunk),
-        applyMiddleware(loggerMiddleware),
+        // applyMiddleware(loggerMiddleware),
         window.devToolsExtension ? window.devToolsExtension() : f => f
     )
 );
