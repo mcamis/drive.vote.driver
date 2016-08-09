@@ -92,6 +92,12 @@ export function dropoffSuccess(ride){
         active_ride: ride
     }
 }
+export function setLocation(location){
+    return{
+        type: 'LOCATION_UPDATED',
+        location: location.coords
+    }
+}
 
 
 
@@ -99,8 +105,8 @@ export function dropoffSuccess(ride){
 export function fetchStatus() {
     const fakeResults = {
         available: true,
-        waiting_rides_interval: '5000ms',
-        update_location_interval: '15000ms',
+        waiting_rides_interval: '5000',
+        update_location_interval: '15000',
         active_ride: {}
     }
 
@@ -162,7 +168,7 @@ export function submitAvailable() {
 
 export function fetchWaitingRides() {
     const fakeJSON = {
-        waiting_rides_interval: '1500ms',
+        waiting_rides_interval: '1500',
         response: [{
             id: 25,
             status: 'waiting_assignment',

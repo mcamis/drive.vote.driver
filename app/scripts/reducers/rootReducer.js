@@ -62,6 +62,15 @@ function driverState(state = {
                 isFetching: false,
                 active_ride: action.active_ride
             })
+            
+        case 'LOCATION_UPDATED':
+            return Object.assign({}, state, {
+                isFetching: false,
+                location: `${action.location.latitude}, ${action.location.longitude}`
+            })
+
+
+            //position.coords.latitude, position.coords.longitude
 
         default:
             return state;

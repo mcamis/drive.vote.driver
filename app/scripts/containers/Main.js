@@ -1,7 +1,8 @@
 import React from 'react';
 import autobind from 'autobind-decorator';
 
-import Header from '../components/Header'
+import Header from '../components/Header';
+import LocationManager from '../helpers/LocationManager';
 
 @autobind
 class Main extends React.Component {
@@ -10,6 +11,7 @@ class Main extends React.Component {
         return (
             <div>
               	<Header logout={this.logout} />
+                <LocationManager {...this.props} />
               	<div className="container">
           	        {React.cloneElement(this.props.children, this.props)}
               	</div>
