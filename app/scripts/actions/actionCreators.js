@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import $ from 'jquery';
 
 export function requestStatus() {
     return {
@@ -43,57 +44,57 @@ export function receveWaitingRides(rides) {
 }
 
 
-export function attemptClaim(){
-    return{
+export function attemptClaim() {
+    return {
         type: 'RIDE_CLAIM_ATTEMPT',
-   }
+    }
 }
-export function claimRideSuccess(ride){
-    return{
+export function claimRideSuccess(ride) {
+    return {
         type: 'RIDE_CLAIMED',
         active_ride: ride
     }
 }
 
 
-export function attemptCancel(){
-    return{
+export function attemptCancel() {
+    return {
         type: 'RIDE_CANCEL_ATTEMPT',
-   }
+    }
 }
-export function cancelRideSuccess(ride){
-    return{
+export function cancelRideSuccess(ride) {
+    return {
         type: 'RIDE_CANCELLED',
         active_ride: {}
     }
 }
 
 
-export function attemptPickup(){
-    return{
+export function attemptPickup() {
+    return {
         type: 'RIDER_PICKUP_ATTEMPT',
-   }
+    }
 }
-export function pickupRiderSuccess(ride){
-    return{
+export function pickupRiderSuccess(ride) {
+    return {
         type: 'RIDER_PICKUP',
         active_ride: ride
     }
 }
 
-export function attemptDropoff(){
-    return{
+export function attemptDropoff() {
+    return {
         type: 'RIDE_COMPLETE_ATTEMPT',
-   }
+    }
 }
-export function dropoffSuccess(ride){
-    return{
+export function dropoffSuccess(ride) {
+    return {
         type: 'RIDE_COMPLETE',
         active_ride: ride
     }
 }
-export function setLocation(location){
-    return{
+export function setLocation(location) {
+    return {
         type: 'LOCATION_UPDATED',
         location: location.coords
     }
@@ -103,39 +104,36 @@ export function setLocation(location){
 
 // TODO: API urls to environment vars
 export function fetchStatus() {
-    const fakeResults = {
-        available: true,
-        waiting_rides_interval: '5000',
-        update_location_interval: '15000',
-        active_ride: {}
-    }
-
+    // const fakeResults = {
+    //     available: true,
+    //     waiting_rides_interval: '5000',
+    //     update_location_interval: '15000',
+    //     active_ride: {}
+    // }
     return function(dispatch) {
         dispatch(requestStatus())
-            // /driving/status
-        return fetch('http://httpbin.org/get', {
-                method: 'GET',
-                mode: 'cors',
-                cache: 'default',
-                headers: new Headers({
-                    'Content-Type': 'application/json'
-                })
-            })
-            .then(response => response.json())
-            .then(json =>
-                dispatch(receiveStatus(fakeResults))
-            )
+        return $.ajax('http://localhost:3000/driving/status', {
+            method: 'GET',
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function(data, status, xhr) {
+                console.log('success', data);
+                dispatch(receiveStatus(data))
+            }
+        });
     }
+
 }
 
 export function submitUnavailable() {
     // /driving/unavailable
     return function(dispatch) {
         dispatch(requestToggle())
-        return fetch('http://httpbin.org/post', {
-                method: 'POST',
-                mode: 'cors',
-                cache: 'default',
+        return fetch('http://localhost:3000/driving/status', {
+                credentials: 'include',
+                crossDomain: true,
+                method: 'GET',
                 headers: new Headers({
                     'Content-Type': 'application/json'
                 })
@@ -149,21 +147,19 @@ export function submitUnavailable() {
 
 export function submitAvailable() {
     // /driving/available
-    return function(dispatch) {
-        dispatch(requestToggle())
-        return fetch('http://httpbin.org/post', {
-                method: 'POST',
-                mode: 'cors',
-                cache: 'default',
-                headers: new Headers({
-                    'Content-Type': 'application/json'
-                })
-            })
-            .then(response => response.json())
-            .then(json =>
-                dispatch(driverAvailable())
-            )
-    }
+    var payload = {
+        'latitude': '41.8979338',
+        'longitude': '-87.67499889999999'
+    };
+
+    $.ajax('http://localhost:3000/driving/available', {
+        method: 'POST',
+        data: payload,
+        xhrFields: {
+            withCredentials: true
+        },
+        content_type: 'application/json'
+    });
 }
 
 export function fetchWaitingRides() {

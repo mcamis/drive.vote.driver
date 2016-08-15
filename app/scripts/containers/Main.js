@@ -6,16 +6,16 @@ import LocationManager from '../helpers/LocationManager';
 
 @autobind
 class Main extends React.Component {
-
+    
     render() {
         return (
             <div>
-              	<Header logout={this.logout} />
+                <Header logout={this.logout} />
                 <LocationManager {...this.props} />
-              	<div className="container">
-          	        {React.cloneElement(this.props.children, this.props)}
-              	</div>
-          	</div>
+                <div className="container">
+                    {React.cloneElement(this.props.children, this.props)}
+                </div>
+            </div>
 
         )
     }
