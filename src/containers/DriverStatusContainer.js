@@ -11,12 +11,11 @@ class DriverStatusContainer extends React.Component {
     }
 
     render() {
-        if (!this.props.state.driverState.isFetching) {
-            if (this.props.state.driverState.available) {
-                return <RideListContainer {...this.props} />
-            } else {
-                return (
-                    <div>
+        if (this.props.state.driverState.available) {
+            return <RideListContainer {...this.props} />
+        } else {
+            return (
+                <div>
                     <div className="jumbotron text-center">
                         <h1><span aria-hidden="true" className="glyphicon glyphicon-user"></span></h1>
                         <p>11 People waiting to vote...</p>
@@ -25,14 +24,8 @@ class DriverStatusContainer extends React.Component {
                         <button className="btn btn-success" onClick={this.props.submitAvailable}>Tap here to start driving</button>
                         </div>
                     </div>
-                )
-            }
-        } else {
-            return (
-                <div>Loading!</div>
             )
         }
-
     }
 
 };
