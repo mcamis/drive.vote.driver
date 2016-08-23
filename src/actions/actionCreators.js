@@ -1,5 +1,4 @@
 import fetch from 'isomorphic-fetch';
-import $ from 'jquery';
 
 export function requestStatus() {
     return {
