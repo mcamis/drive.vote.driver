@@ -35,7 +35,7 @@ class LocationManager extends React.Component {
         }
         if (errorCount >= 10) {
             console.log('Something is wrong with location tracking...');
-            // TODO: Implement location warning
+            // TODO: Implement location not available warning
         }
         this.updateLocationState(locationAvailable);
     }
@@ -46,25 +46,25 @@ class LocationManager extends React.Component {
         });
     }
 
-    componentWillReceiveProps(nextProps) {
-        // I really, really don't like any of this, refactor plz
+    componentDidMount() {
+        // TODO: This is broken
         var self = this;
 
-        this.locationCount = this.locationCount || 0;
-        this.rideCount = this.rideCount || 0;
-        clearInterval(this.intervalCount);
-        clearInterval(this.rideCount);
-        let locationUpdateInterval = nextProps.state.driverState.update_location_interval;
-        if (locationUpdateInterval && nextProps.location) {
-            const locationInterval = setInterval(function() { self.props.submitLocation(self.props.state.driverState.location) }, locationUpdateInterval);
-            this.locationCount = locationInterval;
+        // this.locationCount = this.locationCount || 0;
+        // this.rideCount = this.rideCount || 0;
+        // clearInterval(this.intervalCount);
+        // clearInterval(this.rideCount);
+        // let locationUpdateInterval = nextProps.state.driverState.update_location_interval;
+        // if (locationUpdateInterval && nextProps.location) {
+            const locationInterval = setInterval(function() { self.props.submitLocation(self.props.state.driverState.location) }, 5000);
+        //     this.locationCount = locationInterval;
        
-        }
-        let waitingRidesInterval = nextProps.state.driverState.waiting_rides_interval;
-        if (waitingRidesInterval) {
-            const ridesInterval = setInterval(function() { self.props.fetchWaitingRides() }, waitingRidesInterval);
-            this.rideCount = ridesInterval;
-        }
+        // }
+        // let waitingRidesInterval = nextProps.state.driverState.waiting_rides_interval;
+        // if (waitingRidesInterval) {
+            const ridesInterval = setInterval(function() { self.props.fetchWaitingRides() }, 5000);
+        //     this.rideCount = ridesInterval;
+        // }
     }
 
     render() {

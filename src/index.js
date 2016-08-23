@@ -11,9 +11,9 @@ import ActiveRideContainer from './containers/ActiveRideContainer';
 const router = (
 	<Provider store={store}>
 		<Router history={history}>
-			<Route path="driver"  component={App}>
+			<Route path="/driving"  component={App}>
 				<IndexRoute component={DriverStatusContainer}></IndexRoute>
-				<Route path="ride/:rideId" component={ActiveRideContainer}></Route>
+				<Route path="/driving/ride/:rideId" component={ActiveRideContainer}></Route>
 			</Route>
 		</Router>
 	</Provider>

@@ -22,8 +22,9 @@ module.exports = {
   ],
   output: {
     path: paths.appBuild,
-    filename: 'static/js/[name].[chunkhash:8].js',
-    chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
+    // filename: 'static/js/[name].[chunkhash:8].js',
+    filename: 'static/js/[name].js',
+    // chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
     publicPath: publicPath
   },
   resolve: {
