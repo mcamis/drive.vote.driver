@@ -106,22 +106,20 @@ export function locationSaved(response) {
     }
 }
 
-
-
-
 // TODO: API urls to environment vars
 export function fetchStatus() {
-    // const fakeResults = {
-    //     available: true,
-    //     waiting_rides_interval: '5000',
-    //     update_location_interval: '15000',
-    //     active_ride: {}
-    // }
+   const showLogin=  function(response) {
+        if (!response.ok) {
+            window.location = "https://drive.vote/users/sign_in";
+        }
+        return response;
+    }
     return function(dispatch) {
         dispatch(requestStatus())
         fetch('http://localhost:3000/driving/status', {
                 credentials: 'include',
             })
+            .then(showLogin)
             .then(response => response.json())
             .then(json =>
                 dispatch(receiveStatus(json.response))

@@ -1,9 +1,13 @@
-## Available Scripts
+## Drive The Vote mobile driver app
 
-In the project directory, you can run:
+A React/Redux app for claiming available rides.
 
-### `npm start`
+### Get Started
+####`npm install`
+This installs all depedencies needed for running the app locally.
 
+
+####`npm start`
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
@@ -17,3 +21,10 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.<br>
 The app is ready to be deployed!
+
+### TODO: Rails Integration Insturctions
+
+
+
+
+
