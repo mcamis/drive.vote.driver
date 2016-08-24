@@ -7,23 +7,15 @@ A React/Redux app for claiming available rides.
 This installs all depedencies needed for running the app locally.
 
 
-####`npm start`
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Develop with a local Rails API
+####Setup drive.vote
+Clone the [drive.vote repo](https://github.com/devprogress/drive.vote) and follow environment setup instructions from the [wiki](https://github.com/devprogress/drive.vote/wiki/Dev-environment-setup).
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+####Point to the correct `bundle.js` in Rails
+Set via `/app/views/driving/index.html.haml` in the Rails repo.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-The app is ready to be deployed!
-
-### TODO: Rails Integration Insturctions
-
+####Start local servs
+With the Rails server already running, run `npm start`. You should now be able to test the driver app at [http://localhost:3000/driving](http://localhost:3000/driving)
 
 
 
