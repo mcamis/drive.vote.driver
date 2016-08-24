@@ -1,6 +1,8 @@
 import fetch from 'isomorphic-fetch';
 
-const api = 'https://drive.vote/driving'
+const dev = 'http://localhost:3000/driving';
+const prod = 'https://drive.vote/driving';
+const api = prod;
 
 export function requestStatus() {
     return {
@@ -9,7 +11,6 @@ export function requestStatus() {
 }
 
 export function receiveStatus(status) {
-    console.log('received status', status);
     return {
         type: 'RECEIVE_STATUS',
         available: status.available,

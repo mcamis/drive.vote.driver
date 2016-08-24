@@ -1,7 +1,18 @@
-.logo {
-    width: 60px;
-    height: 42px;
+/* Layout */
+
+.container {
+    max-width: 600px;
 }
+
+.btn-bottom {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+
+/* Utilities */
 
 .p-y {
     padding-top: 1em;
@@ -16,6 +27,10 @@
     margin-bottom: 1em;
 }
 
-.container {
-    max-width: 600px;
+
+/* Utilities */
+
+.logo {
+    width: 60px;
+    height: 42px;
 }

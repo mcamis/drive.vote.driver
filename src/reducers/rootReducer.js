@@ -2,7 +2,8 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
 function driverState(state = {
-    isFetching: false,
+    initialFetch: true,
+    isFetching: true,
     rides: [],
 }, action) {
     switch (action.type) {
@@ -14,6 +15,7 @@ function driverState(state = {
             })
         case 'RECEIVE_STATUS':
             return Object.assign({}, state, {
+                initialFetch: false,
                 isFetching: false,
                 available: action.available,
                 waiting_rides_interval: action.waiting_rides_interval * 100,
