@@ -35,8 +35,8 @@ class RideListContainer extends React.Component {
                     return (
                         <div>
                         <div className="jumbotron text-center">
-                            <h1><i className="fa fa-circle-o-notch fa-spin"></i></h1>
-                            <p>Waiting for voters</p>
+                            <h1><i className="fa fa-circle-o-notch fa-spin text-info"></i></h1>
+                            <p>Looking for voters...</p>
                         </div>
                         <div className="text-center">
                             <button className="btn btn-danger" onClick={this.props.submitUnavailable}>Tap here to stop driving</button>
