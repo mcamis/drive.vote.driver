@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 
-const api = 'http://drive.vote/driving'
+const api = 'https://drive.vote/driving'
 
 export function requestStatus() {
     return {
