@@ -6,14 +6,12 @@ import  store, { history } from './store';
 
 import App from './containers/App';
 import DriverStatusContainer from './containers/DriverStatusContainer';
-import ActiveRideContainer from './containers/ActiveRideContainer';
 
 const router = (
 	<Provider store={store}>
 		<Router history={history}>
 			<Route path="/driving"  component={App}>
 				<IndexRoute component={DriverStatusContainer}></IndexRoute>
-				<Route path="/driving/ride/:rideId" component={ActiveRideContainer}></Route>
 			</Route>
 		</Router>
 	</Provider>

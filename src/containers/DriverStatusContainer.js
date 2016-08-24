@@ -17,7 +17,7 @@ class DriverStatusContainer extends React.Component {
             return (
                 <div>
                     <div className="jumbotron text-center">
-                        <h1><span aria-hidden="true" className="glyphicon glyphicon-user"></span></h1>
+                        <h1><i className="fa fa-users"></i></h1>
                         <p>11 People waiting to vote...</p>
                     </div>
                     <div className="text-center">

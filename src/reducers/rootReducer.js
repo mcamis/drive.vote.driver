@@ -13,7 +13,6 @@ function driverState(state = {
                 isFetching: true,
             })
         case 'RECEIVE_STATUS':
-            console.log('status received', action)
             return Object.assign({}, state, {
                 isFetching: false,
                 available: action.available,

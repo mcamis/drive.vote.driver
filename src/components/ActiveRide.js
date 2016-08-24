@@ -6,14 +6,19 @@ import autobind from 'autobind-decorator';
 class ActiveRide extends React.Component {
 
     render() {
+
         const ride = this.props.ride;
+        console.log('Active Ride!', ride);
         //Current status of the ride. One of waiting_assignment, driver_assigned, picked_up, complete.
         switch (ride.status) {
             case 'driver_assigned':
-                let fromMapLink = `https://www.google.com/maps?saddr=My+Location&daddr=${ride.from_address}`;
+                let fromMapLink = `https://www.google.com/maps?saddr=My+Location&daddr=${ride.from_address}, ${ride.from_city}, ${ride.from_state}`;
                 return (
                     <div className="panel panel-default">
-                        <p>Pick up ride <label>{ride.id}</label></p>
+                        <p>Pick up voter: <label>{ride.name}</label></p>
+                        <p>Additional passengers: <label>{ride.additional_passengers}</label></p>
+                        <p>Description: <label>{ride.description}</label></p>
+                        <p>Special requests: <label>{ride.special_requests}</label></p>
                         <p>{ride.from_address}</p>
                         <a className="btn btn-primary btn-block" target="_blank" href={fromMapLink}>Get directions</a>
                         <button className="btn btn-success btn-block" onClick={()=>this.props.pickupRider(ride)}>Rider picked up</button>
@@ -24,18 +29,31 @@ class ActiveRide extends React.Component {
                 let toMapLink = `https://www.google.com/maps?saddr=My+Location&daddr=${ride.to_address}`;
                 return (
                     <div className="panel panel-default">
-                        <p>Drop off at polls</p>
-                        <p>Ride <label>{ride.id}</label></p>
+                        <p>Drop off at voting station: <label>{ride.name}</label></p>
+                        <p>Additional passengers: <label>{ride.additional_passengers}</label></p>
+                        <p>Description: <label>{ride.description}</label></p>
+                        <p>Special requests: <label>{ride.special_requests}</label></p>
                         <p>{ride.to_address}</p>
                          <a className="btn btn-primary btn-block" target="_blank" href={toMapLink}>Get directions</a>
                         <button className="btn btn-success btn-block" onClick={()=>this.props.completeRide(ride)}>Complete ride</button>
                     </div>
                 )
             case 'complete':
+
                 return (
-                    <div className="">
-                        <img src="/app/assets/images/obama_chuckled.png" alt='Obama chuckeled: "You mean the Chaos Emeralds?"' /> <br />
+
+                    <div className="jumbotron text-center">
+                        <h1>
+                            <span className="fa-stack fa-5x">
+                              <i className="fa fa-certificate fa-stack-2x text-success fa-spin"></i>
+                              <i className="fa fa-thumbs-up fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </h1>
+                        <p>{ride.name} dropped off. Awesome!</p>
+                        <br />
+                        <br />
                         <button className="btn btn-danger" onClick={this.props.submitUnavailable}>Stop Driving</button>
+                        <br />
                         <button className="btn btn-success" onClick={this.props.fetchStatus}>Keep Driving</button>
                     </div>
                 )

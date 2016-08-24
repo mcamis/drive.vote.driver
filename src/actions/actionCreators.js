@@ -34,7 +34,6 @@ export function driverAvailable() {
 }
 
 export function receveWaitingRides(rides) {
-    console.log('rides:', rides);
     return {
         type: 'RECEIVE_RIDES',
         rides: rides.response,
@@ -108,7 +107,7 @@ export function locationSaved(response) {
 
 // TODO: API urls to environment vars
 export function fetchStatus() {
-   const showLogin=  function(response) {
+    const showLogin = function(response) {
         if (!response.ok) {
             window.location = "https://drive.vote/users/sign_in";
         }
@@ -130,7 +129,7 @@ export function fetchStatus() {
 export function submitUnavailable() {
     // /driving/unavailable
     return function(dispatch) {
-        dispatch(requestToggle())
+        dispatch(requestToggle());
         return fetch('http://localhost:3000/driving/unavailable', {
                 credentials: 'include',
                 method: 'POST',
@@ -144,7 +143,7 @@ export function submitUnavailable() {
 
 export function submitAvailable() {
     return function(dispatch) {
-        dispatch(requestToggle())
+        dispatch(requestToggle());
         return fetch('http://localhost:3000/driving/available', {
                 credentials: 'include',
                 method: 'POST',
@@ -157,16 +156,11 @@ export function submitAvailable() {
 }
 
 export function submitLocation(location) {
-    // /driving/available
-    var payload = {
-        'latitude': location.latitude,
-        'longitude': location.longitude
-    };
     return function(dispatch) {
-        fetch('http://localhost:3000/driving/location', {
+        // fetch(`http://localhost:3000/driving/location?latitude=${location.latitude}&longitude=${location.longitude}', {
+        fetch('http://localhost:3000/driving/location?latitude=28.5364748&longitude=-81.399317', {
                 credentials: 'include',
-                method: 'POST',
-                body: payload
+                method: 'POST'
             })
             .then(response => response.json())
             .then(json =>
@@ -176,24 +170,11 @@ export function submitLocation(location) {
 }
 
 export function fetchWaitingRides() {
-    // const fakeJSON = {
-    //     waiting_rides_interval: '1500',
-    //     response: [{
-    //         id: 25,
-    //         status: 'waiting_assignment',
-    //         from_address: '300 Cadman Plaza W, Brooklyn, NY 11201',
-    //         to_address: '1600 Pennsylvania Ave NW, Washington, DC 20500'
-    //     }, {
-    //         id: 30,
-    //         status: 'waiting_assignment',
-    //         from_address: '902 N Wolcott Ave, Chicago IL 60622',
-    //         to_address: '3514 N Broadway St, Chicago IL 60654'
-    //     }]
-    // };
-    // /driving/waiting_rides
+
     return function(dispatch) {
         dispatch(requestStatus())
-        fetch('http://localhost:3000/driving/waiting_rides', {
+            // fetch(`http://localhost:3000/driving/waiting_rides?latitude=${location.latitude}&longitude=${location.longitude}', {
+        fetch('http://localhost:3000/driving/waiting_rides?latitude=28.5364748&longitude=-81.399317', {
                 credentials: 'include',
             })
             .then(response => response.json())
@@ -207,7 +188,7 @@ export function claimRide(ride) {
     // /driving/accept_rid
     // Maybe this endpoint should return the current state of the ride?
     return function(dispatch) {
-        dispatch(attemptClaim())
+        dispatch(attemptClaim());
         return fetch('http://httpbin.org/post', {
                 method: 'POST',
                 mode: 'cors',
@@ -226,7 +207,7 @@ export function claimRide(ride) {
 export function cancelRide(ride) {
     // /driving/unaccept_ride
     return function(dispatch) {
-        dispatch(attemptCancel())
+        dispatch(attemptCancel());
         return fetch('http://httpbin.org/post', {
                 method: 'POST',
                 mode: 'cors',
@@ -243,16 +224,11 @@ export function cancelRide(ride) {
 }
 
 export function pickupRider(ride) {
-    // /driving/pickup_ride
-    return function(dispatch) {
+    return function(dispatch) {;
         dispatch(attemptPickup())
-        return fetch('http://httpbin.org/post', {
+        fetch(`http://localhost:3000/driving/pickup_ride?ride_id=${ride.id}`, {
+                credentials: 'include',
                 method: 'POST',
-                mode: 'cors',
-                cache: 'default',
-                headers: new Headers({
-                    'Content-Type': 'application/json'
-                })
             })
             .then(response => response.json())
             .then(json =>
@@ -263,16 +239,11 @@ export function pickupRider(ride) {
 
 
 export function completeRide(ride) {
-    // /driving/complete_ride
     return function(dispatch) {
-        dispatch(attemptDropoff())
-        return fetch('http://httpbin.org/post', {
+        dispatch(attemptDropoff());
+        fetch(`http://localhost:3000/driving/complete_ride?ride_id=${ride.id}`, {
+                credentials: 'include',
                 method: 'POST',
-                mode: 'cors',
-                cache: 'default',
-                headers: new Headers({
-                    'Content-Type': 'application/json'
-                })
             })
             .then(response => response.json())
             .then(json =>

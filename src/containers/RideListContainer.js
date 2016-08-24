@@ -35,7 +35,7 @@ class RideListContainer extends React.Component {
                     return (
                         <div>
                         <div className="jumbotron text-center">
-                            <h1><span aria-hidden="true" className="glyphicon glyphicon-transfer"></span></h1>
+                            <h1><i className="fa fa-circle-o-notch fa-spin"></i></h1>
                             <p>Waiting for voters</p>
                         </div>
                         <div className="text-center">

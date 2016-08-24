@@ -129,7 +129,9 @@ function openBrowser(port) {
       execSync(
         'osascript ' +
         path.resolve(__dirname, './utils/chrome.applescript') +
-        ' http://localhost:' + port + '/'
+        // TODO: Rails-specific environmant vars to control this
+        ' http://localhost:3000/driving'
+        // ' http://localhost:' + port + '/driving'
       );
       return;
     } catch (err) {
