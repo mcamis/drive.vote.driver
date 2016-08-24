@@ -111,7 +111,7 @@ export function locationSaved(response) {
 export function fetchStatus() {
     return function(dispatch) {
         dispatch(requestStatus())
-        fetch(`${api}driving/status`, {
+        fetch(`${api}/status`, {
                 credentials: 'include',
             })
             .then(response => response.json())
