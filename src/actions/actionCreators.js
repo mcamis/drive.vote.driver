@@ -107,18 +107,11 @@ export function locationSaved(response) {
 
 // TODO: API urls to environment vars
 export function fetchStatus() {
-    const showLogin = function(response) {
-        if (!response.ok) {
-            window.location = "https://drive.vote/users/sign_in";
-        }
-        return response;
-    }
     return function(dispatch) {
         dispatch(requestStatus())
         fetch('http://localhost:3000/driving/status', {
                 credentials: 'include',
             })
-            .then(showLogin)
             .then(response => response.json())
             .then(json =>
                 dispatch(receiveStatus(json.response))
