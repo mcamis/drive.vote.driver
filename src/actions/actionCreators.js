@@ -1,5 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
+const api = 'http://drive.vote/driving'
+
 export function requestStatus() {
     return {
         type: 'REQUEST_STATUS',
@@ -109,7 +111,7 @@ export function locationSaved(response) {
 export function fetchStatus() {
     return function(dispatch) {
         dispatch(requestStatus())
-        fetch('http://localhost:3000/driving/status', {
+        fetch(`${api}driving/status`, {
                 credentials: 'include',
             })
             .then(response => response.json())
@@ -120,10 +122,10 @@ export function fetchStatus() {
 }
 
 export function submitUnavailable() {
-    // /driving/unavailable
+    // /unavailable
     return function(dispatch) {
         dispatch(requestToggle());
-        return fetch('http://localhost:3000/driving/unavailable', {
+        return fetch(`${api}/unavailable`, {
                 credentials: 'include',
                 method: 'POST',
             })
@@ -137,7 +139,7 @@ export function submitUnavailable() {
 export function submitAvailable() {
     return function(dispatch) {
         dispatch(requestToggle());
-        return fetch('http://localhost:3000/driving/available', {
+        return fetch(`${api}/available`, {
                 credentials: 'include',
                 method: 'POST',
             })
@@ -150,8 +152,8 @@ export function submitAvailable() {
 
 export function submitLocation(location) {
     return function(dispatch) {
-        fetch(`http://localhost:3000/driving/location?latitude=${location.latitude}&longitude=${location.longitude}`, {
-        // fetch('http://localhost:3000/driving/location?latitude=28.5364748&longitude=-81.399317', {
+        fetch(`${api}/location?latitude=${location.latitude}&longitude=${location.longitude}`, {
+                // fetch(`${api}/location?latitude=28.5364748&longitude=-81.399317', {
                 credentials: 'include',
                 method: 'POST'
             })
@@ -166,7 +168,7 @@ export function fetchWaitingRides() {
 
     return function(dispatch) {
         dispatch(requestStatus())
-        fetch('http://localhost:3000/driving/waiting_rides', {
+        fetch(`${api}/waiting_rides`, {
                 credentials: 'include',
             })
             .then(response => response.json())
@@ -177,17 +179,11 @@ export function fetchWaitingRides() {
 }
 
 export function claimRide(ride) {
-    // /driving/accept_rid
-    // Maybe this endpoint should return the current state of the ride?
     return function(dispatch) {
         dispatch(attemptClaim());
-        return fetch('http://httpbin.org/post', {
+        fetch(`${api}/accept_ride?ride_id=${ride.id}`, {
+                credentials: 'include',
                 method: 'POST',
-                mode: 'cors',
-                cache: 'default',
-                headers: new Headers({
-                    'Content-Type': 'application/json'
-                })
             })
             .then(response => response.json())
             .then(json =>
@@ -197,16 +193,11 @@ export function claimRide(ride) {
 }
 
 export function cancelRide(ride) {
-    // /driving/unaccept_ride
     return function(dispatch) {
         dispatch(attemptCancel());
-        return fetch('http://httpbin.org/post', {
+        fetch(`${api}/unaccept_ride?ride_id=${ride.id}`, {
+                credentials: 'include',
                 method: 'POST',
-                mode: 'cors',
-                cache: 'default',
-                headers: new Headers({
-                    'Content-Type': 'application/json'
-                })
             })
             .then(response => response.json())
             .then(json =>
@@ -218,7 +209,7 @@ export function cancelRide(ride) {
 export function pickupRider(ride) {
     return function(dispatch) {;
         dispatch(attemptPickup())
-        fetch(`http://localhost:3000/driving/pickup_ride?ride_id=${ride.id}`, {
+        fetch(`${api}/pickup_ride?ride_id=${ride.id}`, {
                 credentials: 'include',
                 method: 'POST',
             })
@@ -233,7 +224,7 @@ export function pickupRider(ride) {
 export function completeRide(ride) {
     return function(dispatch) {
         dispatch(attemptDropoff());
-        fetch(`http://localhost:3000/driving/complete_ride?ride_id=${ride.id}`, {
+        fetch(`${api}/complete_ride?ride_id=${ride.id}`, {
                 credentials: 'include',
                 method: 'POST',
             })
