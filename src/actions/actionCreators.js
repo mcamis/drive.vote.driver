@@ -150,8 +150,8 @@ export function submitAvailable() {
 
 export function submitLocation(location) {
     return function(dispatch) {
-        // fetch(`http://localhost:3000/driving/location?latitude=${location.latitude}&longitude=${location.longitude}', {
-        fetch('http://localhost:3000/driving/location?latitude=28.5364748&longitude=-81.399317', {
+        fetch(`http://localhost:3000/driving/location?latitude=${location.latitude}&longitude=${location.longitude}`, {
+        // fetch('http://localhost:3000/driving/location?latitude=28.5364748&longitude=-81.399317', {
                 credentials: 'include',
                 method: 'POST'
             })
@@ -166,8 +166,7 @@ export function fetchWaitingRides() {
 
     return function(dispatch) {
         dispatch(requestStatus())
-            // fetch(`http://localhost:3000/driving/waiting_rides?latitude=${location.latitude}&longitude=${location.longitude}', {
-        fetch('http://localhost:3000/driving/waiting_rides?latitude=28.5364748&longitude=-81.399317', {
+        fetch('http://localhost:3000/driving/waiting_rides', {
                 credentials: 'include',
             })
             .then(response => response.json())
