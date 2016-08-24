@@ -3,7 +3,7 @@ import autobind from 'autobind-decorator';
 
 import Header from '../components/Header';
 import LocationManager from '../helpers/LocationManager';
-import '../styles/bootstrap.css';
+import '../styles/drive-vote.css';
 
 @autobind
 class Main extends React.Component {

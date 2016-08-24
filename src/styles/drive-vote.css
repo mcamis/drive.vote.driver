@@ -2,10 +2,12 @@
     width: 60px;
     height: 42px;
 }
-.p-y{
-  padding-top: 2em;
-  padding-bottom: 2em;
+
+.p-y {
+    padding-top: 2em;
+    padding-bottom: 2em;
 }
+
 .p-b {
     padding-bottom: 2em;
 }
