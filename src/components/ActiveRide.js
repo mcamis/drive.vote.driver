@@ -20,7 +20,7 @@ class ActiveRide extends React.Component {
                         <p>Description: <label>{ride.description}</label></p>
                         <p>Special requests: <label>{ride.special_requests}</label></p>
                         <p>{ride.from_address}</p>
-                        <a className="btn btn-primary btn-block" target="_blank" href={fromMapLink}>Get directions</a>
+                        <a className="btn btn-info btn-block" target="_blank" href={fromMapLink}>Get directions</a>
                         <button className="btn btn-success btn-block" onClick={()=>this.props.pickupRider(ride)}>Rider picked up</button>
                         <button className="btn btn-danger btn-block" onClick={()=>this.props.cancelRide(ride)}>Cancel ride</button>
                     </div>
@@ -34,7 +34,7 @@ class ActiveRide extends React.Component {
                         <p>Description: <label>{ride.description}</label></p>
                         <p>Special requests: <label>{ride.special_requests}</label></p>
                         <p>{ride.to_address}</p>
-                         <a className="btn btn-primary btn-block" target="_blank" href={toMapLink}>Get directions</a>
+                         <a className="btn btn-info btn-block" target="_blank" href={toMapLink}>Get directions</a>
                         <button className="btn btn-success btn-block" onClick={()=>this.props.completeRide(ride)}>Complete ride</button>
                     </div>
                 )
@@ -52,7 +52,7 @@ class ActiveRide extends React.Component {
                         <p>{ride.name} dropped off. Awesome!</p>
                         <br />
                         <br />
-                        <button className="btn btn-danger" onClick={this.props.submitUnavailable}>Stop Driving</button>
+                        <button className="btn btn-danger m-b" onClick={this.props.submitUnavailable}>Stop Driving</button>
                         <br />
                         <button className="btn btn-success" onClick={this.props.fetchStatus}>Keep Driving</button>
                     </div>

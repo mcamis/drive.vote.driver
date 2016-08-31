@@ -18,8 +18,8 @@ class DriverStatusContainer extends React.Component {
                 return (
                     <div>
                         <div className="jumbotron text-center">
-                            <h1><i className="fa fa-users"></i></h1>
-                            <p>11 People waiting to vote...</p>
+                            <h1><i className="fa fa-ban"></i></h1>
+                            <p>Not available to drive<br /> Tap the button below to get started</p>
                         </div>
                         <button className="btn btn-success btn-bottom" onClick={this.props.submitAvailable}>Tap here to start driving</button>
                     </div>

@@ -11,6 +11,10 @@
     transform: translate(-50%, 0);
 }
 
+label{
+	display: block;
+}
+
 
 /* Utilities */
 
@@ -31,6 +35,5 @@
 /* Utilities */
 
 .logo {
-    width: 60px;
-    height: 42px;
+    width: 80px;
 }
